@@ -1,0 +1,50 @@
+生物信息学2017-2018学年Group 7 Final Project 
+
+	Using CapsNet to Predict Protein Secondary Structure.
+	队员：李响 何卫明 高文昊 潘岱松 张煌昭
+
+
+目录结构及内容如下
+./
+	Code/		整个CapsNet网络源代码，参考github项目https://github.com/naturomics/CapsNet-Tensorflow
+		data/		mnist数据集
+			...
+		logdir/		网络训练的保存断点
+			...
+		results/	训练结果保存于该目录下
+			...
+		...
+		capsLayer.py	Capsule层的TF实现
+		capsNet.py		两层Capsule连接的CapNet的TF实现
+		config.py		网络参数和超参数设置
+		dataset.py		snRNA/snoRNA数据集的操作
+		main.py			Python3主程序
+		PDB_data.py		PDB二级结构数据集的操作
+		utils.py		CapsNet的数据集操作等
+		...
+	Dataset/	训练用数据集
+		...			包括rnRNA/snoRNA数据集
+					以及PDB二级结构数据集等
+	Result/		训练结果
+		ori_center/		使用PDB原始的8类二级结构标注训练
+			loss.csv
+			train_acc.csv
+			val_acc.csv
+		simp_center/	使用简化的3类二级结构标注训练
+			loss.csv
+			train_acc.csv
+			val_acc.csv
+
+使用方法如下
+首先确保TF version >= 1.4，确保CPU内存GPU显存足够
+删除logdir下保存所有断点，开始一次新的训练
+在Code目录下运行如下命令启动网络，dataset参数指定数据集，mnist为训练Hinton在论文中的相同模型，rna为训练snRNA/snoRNA分类模型，pdb为训练PDB二级结构3类标注模型，ori-pdb为训练PDB二级结构8类标注模型
+	python3 main.py --dataset=xxx
+
+实验结果
+3类二级结构标注：
+	train acc = 0.855
+	valid acc = 0.834
+8类二级结构标注：
+	train acc = 0.599
+	valid acc = 0.602
